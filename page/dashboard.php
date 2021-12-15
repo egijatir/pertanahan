@@ -1,3 +1,11 @@
+<?php 
+include('../sistem/koneksi.php');
+session_start();
+//berfungsi mengecek apakah user sudah login atau belum
+if($_SESSION['level']==""){
+	header("location:../index.php?pesan=belum_login");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,14 +33,14 @@
   <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
       <div class="logo">
-        <a href="https://www.creative-tim.com" class="simple-text logo-mini">
+        <a href="" class="simple-text logo-mini">
           <div class="logo-image-small">
             <img src="../assets/img/logo-small.png">
           </div>
           <!-- <p>CT</p> -->
         </a>
-        <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-          Welcome "......."
+        <a href="" class="simple-text logo-normal">
+          Welcome <?php echo $_SESSION['level']; ?>
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
           </div> -->
@@ -54,7 +62,7 @@
             <div class="collapse " id="masterdata">
               <ul class="nav">
                 <li>
-                  <a href="../examples/pages/timeline.html">
+                  <a href="desa.php">
                     <span class="sidebar-mini-icon"><i class="nc-icon nc-minimal-right"></i></span>
                     <span class="sidebar-normal"> Desa </span>
                   </a>
@@ -62,19 +70,19 @@
                 </ul>
           </li>
           <li>
-            <a href="./SKPT.php">
+            <a href="SKPT.php">
               <i class="nc-icon nc-single-copy-04"></i>
               <p>SKPT</p>
             </a>
           </li>
           <li>
-            <a href="./Profile.php">
+            <a href="Profile.php">
               <i class="nc-icon nc-single-02"></i>
               <p>Profile</p>
             </a>
           </li>
           <li>
-            <a href="./user.html">
+            <a href="../sistem/logout.php">
               <i class="nc-icon nc-button-play"></i>
               <p>LogOut</p>
             </a>
@@ -247,20 +255,14 @@
             <div class="card card-chart">
               <div class="card-header">
                 <h5 class="card-title">Maps</h5>
-                <p class="card-category">Line Chart with Points</p>
+                
               </div>
               <div class="card-body">
-                <canvas id="speedChart" width="400" height="100"></canvas>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255345.3281675057!2d116.97984865683895!3d-0.27978066375927724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df674dc1a9584d3%3A0x5410e6a025b3004b!2sKec.%20Tenggarong%20Seberang%2C%20Kabupaten%20Kutai%20Kartanegara%2C%20Kalimantan%20Timur!5e0!3m2!1sid!2sid!4v1639595643500!5m2!1sid!2sid" width="1000" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
               </div>
-              <div class="card-footer">
-                <div class="chart-legend">
-                  <i class="fa fa-circle text-info"></i> Tesla Model S
-                  <i class="fa fa-circle text-warning"></i> BMW 5 Series
-                </div>
-                <hr />
-                <div class="card-stats">
-                  <i class="fa fa-check"></i> Data information certified
-                </div>
+
+              
+               
               </div>
             </div>
           </div>

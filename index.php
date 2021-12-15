@@ -30,17 +30,31 @@
           <div class="col-md-12">
             <div class="form-block mx-auto">
               <div class="text-center mb-5">
+              <?php 
+	if(isset($_GET['pesan'])){
+		if($_GET['pesan']=="gagal"){
+			echo "<div class='alert'>Username dan Password tidak sesuai !</div>";
+		}
+    elseif($_GET['pesan']=="belum_login"){
+			echo "<div class='alert'>Anda Belum Login !</div>";
+		}
+    elseif($_GET['pesan']=="logout"){
+			echo "<div class='alert'>Berhasil Logout !</div>";
+		}
+	}
+	?>
               <h3>Login to <strong>Pertanahan</strong></h3>
               <!-- <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p> -->
               </div>
-              <form action="#" method="post">
+              <form action="./sistem/login.php" method="post">
                 <div class="form-group first">
+                  
                   <label for="username">Username</label>
-                  <input type="text" class="form-control" placeholder="your-email@gmail.com" id="username">
+                  <input type="text"   name="username" class="form-control" placeholder="Username" required>
                 </div>
                 <div class="form-group last mb-3">
                   <label for="password">Password</label>
-                  <input type="password" class="form-control" placeholder="Your Password" id="password">
+                  <input type="password"  name="password" class="form-control" placeholder="Password"  required>
                 </div>
                 
                 <div class="d-sm-flex mb-5 align-items-center">
@@ -62,9 +76,6 @@
 
     
   </div>
-    
-    
-
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
