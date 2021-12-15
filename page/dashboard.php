@@ -27,6 +27,12 @@ if ($_SESSION['level'] == "") {
   <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <style type="text/css">
+   .upper { text-transform: uppercase; }
+   .lower { text-transform: lowercase; }
+   .cap   { text-transform: capitalize; }
+   .small { font-variant:   small-caps; }
+</style>
 </head>
 
 <body class="">

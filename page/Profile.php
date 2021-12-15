@@ -1,10 +1,18 @@
+<?php
+include('../sistem/koneksi.php');
+session_start();
+//berfungsi mengecek apakah user sudah login atau belum
+if ($_SESSION['level'] == "") {
+  header("location:../index.php?pesan=belum_login");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="../assets/images/pavi.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     Pertanahan
@@ -17,21 +25,51 @@
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
+  <script src="https://kit.fontawesome.com/2a985d6dcf.js" crossorigin="anonymous"></script>
   <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <script>
+    window.setTimeout(function() {
+      $(".alert").fadeTo(500, 0).slideUp(500, function() {
+        $(this).remove();
+      });
+    }, 5000);
+  </script>
+
+  <style type="text/css">
+    .upper {
+      text-transform: uppercase;
+    }
+
+    .lower {
+      text-transform: lowercase;
+    }
+
+    .cap {
+      text-transform: capitalize;
+    }
+
+    .button {
+      background-color: Transparent;
+      background-repeat: no-repeat;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+    }
+  </style>
 </head>
 
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
       <div class="logo">
-        <a href="https://www.creative-tim.com" class="simple-text logo-mini">
+        <a href="" class="simple-text logo-mini">
           <div class="logo-image-small">
             <img src="../assets/img/logo-small.png">
           </div>
           <!-- <p>CT</p> -->
         </a>
-        <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-          Welcome "......."
+        <a href="" class="simple-text logo-normal">
+          Welcome <?php echo $_SESSION['level']; ?>
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
           </div> -->
@@ -41,40 +79,40 @@
         <ul class="nav">
           <li>
             <a href="./dashboard.php">
-              <i class="nc-icon nc-bank"></i>
+              <i class="fas fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
           </li>
           <li>
             <a data-toggle="collapse" href="#masterdata">
-              <i class="nc-icon nc-map-big"></i>
+              <i class="fas fa-folder"></i>
               <p>Master Data <b class="caret"></b></p>
             </a>
             <div class="collapse " id="masterdata">
               <ul class="nav">
                 <li>
-                  <a href="../examples/pages/timeline.html">
-                    <span class="sidebar-mini-icon"><i class="nc-icon nc-minimal-right"></i></span>
-                    <span class="sidebar-normal"> Desa </span>
+                  <a href="profile.php">
+                    <span class="sidebar-mini-icon"><i class="fas fa-angle-right"></i></span>
+                    <span class="sidebar-normal"> desa</span>
                   </a>
                 </li>
               </ul>
           </li>
           <li>
-            <a href="./SKPT.php">
-              <i class="nc-icon nc-single-copy-04"></i>
+            <a href="SKPT.php">
+              <i class="fas fa-file-alt"></i>
               <p>SKPT</p>
             </a>
           </li>
           <li class="active ">
-            <a href="./Profile.php">
-              <i class="nc-icon nc-single-02"></i>
+            <a href="Profile.php">
+              <i class="fas fa-user"></i>
               <p>Profile</p>
             </a>
           </li>
           <li>
-            <a href="./user.html">
-              <i class="nc-icon nc-button-play"></i>
+            <a href="../sistem/logout.php">
+              <i class="fas fa-sign-out-alt"></i>
               <p>LogOut</p>
             </a>
           </li>
@@ -115,144 +153,139 @@
           </div>
         </div>
       </nav>
-      <!-- End Navbar -->
-      <div class="content">
+      <section class="content">
+
         <div class="row">
-          <div class="col-md-4">
-            <div class="card card-user">
-              <div class="image">
-                <img src="../assets/img/damir-bosnjak.jpg" alt="...">
-              </div>
-              <div class="card-body">
-                <div class="author">
-                  <a href="#">
-                    <img class="avatar border-gray" src="../assets/img/logo-small.png" alt="...">
-                    <h5 class="title">USER </h5>
-                  </a>
-                  <p class="description">
-                    Admin
-                  </p>
+          <div class="col-md-3">
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle" src="http://151.106.125.164/img/profile.png" alt="User profile picture">
                 </div>
+
+                <h3 class="profile-username text-center">TENGGARONG SEBERANG</h3>
+
+                <p class="text-muted text-center">user</p>
+
+
               </div>
+              <!-- /.card-body -->
             </div>
-              <div class="card-header">
-                
-              
-              </div>
+            <!-- /.card -->
+
+
           </div>
-          <div class="col-md-8">
-            <div class="card card-user">
-              <div class="card-header">
-                <h5 class="card-title">Edit Profile</h5>
-              </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-header p-2">
+
+              </div><!-- /.card-header -->
               <div class="card-body">
-                <form>
-                  <div class="row">
-                    <div class="col-md-5 pr-1">
-                      <div class="form-group">
-                        <label>Company (disabled)</label>
-                        <input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">
+                <div class="tab-content">
+
+
+                  <div class="tab-pane active" id="profile">
+                    <form class="form-horizontal" action="http://151.106.125.164/profile/17" method="POST">
+                      <input type="hidden" name="_token" value="HQ1unkVOj228trgSAbf8pUaxqM0mVvSO0wj9vQJz"> <input type="hidden" name="_method" value="PUT">
+                      <div class="form-group row">
+                        <label for="inputName" class="col-sm-3 col-form-label">Nama</label>
+                        <div class="col-sm-9">
+                          <input type="text" name="name" value="TENGGARONG SEBERANG" class="form-control " id="inputName" placeholder="Name">
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-md-3 px-1">
-                      <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" class="form-control" placeholder="Username" value="michael23">
+                      <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                          <input type="email" name="email" value="tenggarongseberang@mail.com" class="form-control " id="inputEmail" placeholder="Email">
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-md-4 pl-1">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" placeholder="Email">
+                      <div class="form-group row">
+                        <label for="inputName2" class="col-sm-3 col-form-label">Ganti Password</label>
+                        <div class="col-sm-9">
+                          <input type="password" name="password" class="form-control " id="inputName2" placeholder="Kosongkan jika tidak ingin mengganti password">
+                        </div>
                       </div>
-                    </div>
+
+                      <div class="form-group row">
+                        <label for="inputName2" class="col-sm-3 col-form-label">Konfirmasi Password</label>
+                        <div class="col-sm-9">
+                          <input type="password" name="password_confirmation" class="form-control " id="inputName2" placeholder="">
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="inputName3" class="col-sm-3 col-form-label">Nama Pejabat</label>
+                        <div class="col-sm-9">
+                          <input type="text" name="pejabat" value="" class="form-control " id="inputName3" placeholder="Nama Pejabat">
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="inputNip" class="col-sm-3 col-form-label">NIP Pejabat</label>
+                        <div class="col-sm-9">
+                          <input type="text" name="nip" value="" class="form-control " id="inputNip" placeholder="NIP Pejabat">
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="inputGol" class="col-sm-3 col-form-label">Golongan/Pangkat</label>
+                        <div class="col-sm-9">
+                          <input type="text" name="golongan_pangkat" value="" class="form-control " id="inputGol" placeholder="Golongan/Pangkat">
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="inputAlamat" class="col-sm-3 col-form-label">Alamat Kantor</label>
+                        <div class="col-sm-9">
+                          <input type="text" name="alamat" value="" class="form-control " id="inputAlamat" placeholder="Alamat Kantor">
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="offset-sm-3 col-sm-9">
+                          <button type="submit" class="btn btn-success">Update</button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6 pr-1">
-                      <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" class="form-control" placeholder="Company" value="Chet">
-                      </div>
-                    </div>
-                    <div class="col-md-6 pl-1">
-                      <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" class="form-control" placeholder="Last Name" value="Faker">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label>Address</label>
-                        <input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4 pr-1">
-                      <div class="form-group">
-                        <label>City</label>
-                        <input type="text" class="form-control" placeholder="City" value="Melbourne">
-                      </div>
-                    </div>
-                    <div class="col-md-4 px-1">
-                      <div class="form-group">
-                        <label>Country</label>
-                        <input type="text" class="form-control" placeholder="Country" value="Australia">
-                      </div>
-                    </div>
-                    <div class="col-md-4 pl-1">
-                      <div class="form-group">
-                        <label>Postal Code</label>
-                        <input type="number" class="form-control" placeholder="ZIP Code">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label>About Me</label>
-                        <textarea class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="update ml-auto mr-auto">
-                      <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <footer class="footer footer-black  footer-white ">
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="credits ml-auto">
-                      <span class="copyright">
-                        ©
-                        <script>
-                          document.write(new Date().getFullYear())
-                        </script> by UMKT
-                      </span>
-                    </div>
-                  </div>
+                  <!-- /.tab-pane -->
                 </div>
-              </footer>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.nav-tabs-custom -->
+          </div>
+          <!-- /.col -->
+        </div>
+
+      </section>
+      <footer class="footer footer-black  footer-white ">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="credits ml-auto">
+              <script>
+                document.write(new Date().getFullYear())
+              </script> by UMKT
             </div>
           </div>
-          <script src="../assets/js/core/jquery.min.js"></script>
-          <script src="../assets/js/core/popper.min.js"></script>
-          <script src="../assets/js/core/bootstrap.min.js"></script>
-          <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-          <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-          <script src="../assets/js/plugins/chartjs.min.js"></script>
-          <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-          <script src="../assets/demo/demo.js"></script>
-          <script>
-            $(document).ready(function() {
-              demo.initChartsPages();
-            });
-          </script>
+        </div>
+      </footer>
+      <script src="../assets/js/core/jquery.min.js"></script>
+      <script src="../assets/js/core/popper.min.js"></script>
+      <script src="../assets/js/core/bootstrap.min.js"></script>
+      <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+      <script src="../assets/js/plugins/chartjs.min.js"></script>
+      <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+      <script src="../assets/demo/demo.js"></script>
+      <script>
+        $(document).ready(function() {
+          demo.initChartsPages();
+        });
+      </script>
 </body>
 
 </html>

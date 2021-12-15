@@ -34,7 +34,11 @@ if ($_SESSION['level'] == "") {
     });
   }, 5000);
 </script>
-<style>
+
+<style type="text/css">
+   .upper { text-transform: uppercase; }
+   .lower { text-transform: lowercase; }
+   .cap   { text-transform: capitalize; }
   .button {     
     background-color: Transparent;
     background-repeat:no-repeat;
@@ -152,6 +156,8 @@ if ($_SESSION['level'] == "") {
 		}
     elseif($_GET['pesan']=="hapus"){
 			echo "<div class='alert alert-danger' role='alert'>Data Berhasil Di Hapus !!</div>";
+		} elseif($_GET['pesan']=="update"){
+			echo "<div class='alert alert-warning' role='alert'>Data Berhasil Di Update !!</div>";
 		}
 	}
 	?>
@@ -220,7 +226,7 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                               </button>
                               <ul class="dropdown-menu">
                                 <li>
-                                  <a class="dropdown-item" href="http://151.106.125.164/kecamatan/6402012001/edit">
+                                  <a class="dropdown-item" href="../sistem/edit-desa.php?id_desa=<?php echo $r2['id_desa']; ?>">
                                     <i class="fas fa-edit    "></i>
                                     Edit
                                   </a>
@@ -235,10 +241,10 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                             </div>
 
                           </td>
-                          <td style="width: 50px" class="text-center"><?php echo $urut++ ?></td>
-                          <td style="width: 50px" class="text-center"><?php echo $kode_desa ?></td>
-                          <td style="width: 50px" class="text-center"><?php echo $nama_desa ?></td>
-                          <td style="width: 50px" class="text-center"><?php echo $kecamatan ?></td>
+                          <td style="width: 50px" class="text-center" ><p class="upper"><?php echo $urut++ ?></td>
+                          <td style="width: 50px" class="text-center" ><?php echo $kode_desa ?></td>
+                          <td style="width: 50px" class="text-center"><p class="upper"><?php echo $nama_desa ?></td>
+                          <td style="width: 50px" class="text-center"> <p class="upper"><?php echo $kecamatan ?></td>
                         </tr>
                       </tbody>
                     <?php } ?>
