@@ -12,7 +12,7 @@ if ($_SESSION['level'] == "") {
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="../assets/images/pavi.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     Pertanahan
@@ -34,6 +34,15 @@ if ($_SESSION['level'] == "") {
     });
   }, 5000);
 </script>
+<style>
+  .button {     
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;        
+}
+</style>
 </head>
 
 <body class="">
@@ -57,40 +66,40 @@ if ($_SESSION['level'] == "") {
         <ul class="nav">
           <li>
             <a href="./dashboard.php">
-              <i class="nc-icon nc-bank"></i>
+            <i class="fas fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
           </li>
           <li class="active">
             <a data-toggle="collapse" href="#masterdata">
-              <i class="nc-icon nc-map-big"></i>
+            <i class="fas fa-folder-open"></i>
               <p>Master Data <b class="caret"></b></p>
             </a>
             <div class="collapse " id="masterdata">
               <ul class="nav">
                 <li class="active ">
-                  <a href="../examples/pages/timeline.html">
-                    <span class="sidebar-mini-icon"><i class="nc-icon nc-minimal-right"></i></span>
+                  <a href="desa.php">
+                    <span class="sidebar-mini-icon"><i class="fas fa-angle-right"></i></span>
                     <span class="sidebar-normal"> Desa </span>
                   </a>
                 </li>
               </ul>
           </li>
           <li>
-            <a href="./SKPT.php">
-              <i class="nc-icon nc-single-copy-04"></i>
+            <a href="SKPT.php">
+            <i class="fas fa-file-alt"></i>
               <p>SKPT</p>
             </a>
           </li>
           <li>
-            <a href="./Profile.php">
-              <i class="nc-icon nc-single-02"></i>
+            <a href="Profile.php">
+            <i class="fas fa-user"></i>
               <p>Profile</p>
             </a>
           </li>
           <li>
             <a href="../sistem/logout.php">
-              <i class="nc-icon nc-button-play"></i>
+            <i class="fas fa-sign-out-alt"></i>
               <p>LogOut</p>
             </a>
           </li>
@@ -163,13 +172,13 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                     Tambah Data
                   </a>
                   <div class="">
-                    <a href="" class="btn btn-default btn-flat " data-toggle="modal" data-target="#importModal" title="Import File">
+                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#importModal" title="Import File">
                       <i class="fas fa-file-import    "></i>
                     </a>
-                    <a href="http://151.106.125.164/produk/pdf" target="blank" class="btn btn-default btn-flat" title="Cetak PDF">
+                    <a href="" target="blank" class="btn btn-danger" title="Cetak PDF">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
-                    <a href="../sistem/export.php" class="btn btn-default btn-flat" title="Export Excel">
+                    <a href="../sistem/export.php" class="btn btn-success" title="Export Excel">
                       <i class="fas fa-file-excel    "></i>
                     </a>
                   </div>
@@ -206,7 +215,7 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                         <tr>
                           <td style="width: 20px">
                             <div class="btn-group">
-                              <button type="button" class="btn" data-toggle="dropdown">
+                          <button type="button" class="button" data-toggle="dropdown">
                                 <i class="fas fa-ellipsis-v    "></i>
                               </button>
                               <ul class="dropdown-menu">

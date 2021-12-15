@@ -12,7 +12,7 @@ if ($_SESSION['level'] == "") {
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="../assets/images/pavi.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     Pertanahan
@@ -50,13 +50,13 @@ if ($_SESSION['level'] == "") {
         <ul class="nav">
           <li class="active ">
             <a href="./dashboard.php">
-              <i class="nc-icon nc-bank"></i>
+            <i class="fas fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
           </li>
           <li>
             <a data-toggle="collapse" href="#masterdata">
-              <i class="nc-icon nc-map-big"></i>
+            <i class="fas fa-folder"></i>
               <p>Master Data <b class="caret"></b></p>
             </a>
             <div class="collapse " id="masterdata">
@@ -71,19 +71,19 @@ if ($_SESSION['level'] == "") {
           </li>
           <li>
             <a href="SKPT.php">
-              <i class="nc-icon nc-single-copy-04"></i>
+            <i class="fas fa-file-alt"></i>
               <p>SKPT</p>
             </a>
           </li>
           <li>
             <a href="Profile.php">
-              <i class="nc-icon nc-single-02"></i>
+            <i class="fas fa-user"></i>
               <p>Profile</p>
             </a>
           </li>
           <li>
             <a href="../sistem/logout.php">
-              <i class="nc-icon nc-button-play"></i>
+            <i class="fas fa-sign-out-alt"></i>
               <p>LogOut</p>
             </a>
           </li>
@@ -199,7 +199,7 @@ if ($_SESSION['level'] == "") {
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-circle-10 text-danger"></i>
+                    <i class="fas fa-users text-danger" ></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
@@ -227,7 +227,7 @@ if ($_SESSION['level'] == "") {
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-settings-gear-65 text-primary"></i>
+                    <i class="fas fa-bell text-primary"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">

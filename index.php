@@ -15,8 +15,15 @@
     <link rel="icon" type="image/png" href="./assets/img/favicon.png">
     <!-- Style -->
     <link rel="stylesheet" href="./assets/css/style.css">
-
+    <script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove(); 
+    });
+  }, 5000);
+</script>
     <title>Pertanahan</title>
+    
   </head>
   <body>
   
@@ -33,13 +40,13 @@
               <?php 
 	if(isset($_GET['pesan'])){
 		if($_GET['pesan']=="gagal"){
-			echo "<div class='alert'>Username dan Password tidak sesuai !</div>";
+			echo "<div class='alert alert-danger' role='alert'>Username & Password Salah !!</div>";
 		}
     elseif($_GET['pesan']=="belum_login"){
-			echo "<div class='alert'>Anda Belum Login !</div>";
+			echo "<div class='alert alert-danger' role='alert'>Anda Belum Melakukan Login !!</div>";
 		}
     elseif($_GET['pesan']=="logout"){
-			echo "<div class='alert'>Berhasil Logout !</div>";
+			echo"<div class='alert alert-success' role='alert'>LogOut Berhasil</div>";
 		}
 	}
 	?>
@@ -56,14 +63,7 @@
                   <label for="password">Password</label>
                   <input type="password"  name="password" class="form-control" placeholder="Password"  required>
                 </div>
-                
-                <div class="d-sm-flex mb-5 align-items-center">
-                  <label class="control control--checkbox mb-3 mb-sm-0"><span class="caption">Remember me</span>
-                    <input type="checkbox" checked="checked"/>
-                    <div class="control__indicator"></div>
-                  </label>
-                  <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
-                </div>
+               <br><br>
 
                 <input type="submit" value="Log In" class="btn btn-block btn-primary">
 
