@@ -27,6 +27,13 @@ if ($_SESSION['level'] == "") {
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <script src="https://kit.fontawesome.com/2a985d6dcf.js" crossorigin="anonymous"></script>
   <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove(); 
+    });
+  }, 5000);
+</script>
 </head>
 
 <body class="">
@@ -129,13 +136,29 @@ if ($_SESSION['level'] == "") {
           <h3>Manajemen Data Desa/Kelurahan</h3>
 
         </div>
+        <center>     <?php 
+	if(isset($_GET['pesan'])){
+		if($_GET['pesan']=="berhasil"){
+			echo "<div class='alert alert-success' role='alert'>Data Berhasil Di tambahkan !!</div>";
+		}
+    elseif($_GET['pesan']=="hapus"){
+			echo "<div class='alert alert-danger' role='alert'>Data Berhasil Di Hapus !!</div>";
+		}
+	}
+	?>
+  <?php
+$data_desa= mysqli_query($koneksi,"SELECT * FROM desa");
+$jumlah_desa = mysqli_num_rows($data_desa);
+?>
 
+
+      </center>  
         <div class="row">
           <div class="col-12">
             <div class="card">
               <div class="card-header">
                 <div class="d-flex justify-content-between">
-                  <a href="http://151.106.125.164/kelurahan/create" class="btn btn-primary">
+                  <a href=""  data-toggle="modal" data-target="#modalForm" class="btn btn-primary">
                     <i class="fas fa-user-plus    "></i>
                     Tambah Data
                   </a>
@@ -146,28 +169,23 @@ if ($_SESSION['level'] == "") {
                     <a href="http://151.106.125.164/produk/pdf" target="blank" class="btn btn-default btn-flat" title="Cetak PDF">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
-                    <a href="http://151.106.125.164/produk/export" class="btn btn-default btn-flat" title="Export Excel">
+                    <a href="../sistem/export.php" class="btn btn-default btn-flat" title="Export Excel">
                       <i class="fas fa-file-excel    "></i>
                     </a>
                   </div>
                 </div>
               </div>
-              <?php
+           <?php
 
-              $sql2   = "select * from desa order by id_desa desc";
+              $sql2   = "select * from desa order by id_desa asc";
 
               // ini but tmpilkn dt
               $q2     = mysqli_query($koneksi, $sql2);
               $urut   = 1;
-              while ($r2 = mysqli_fetch_array($q2)) {
-                $id_desa         = $r2['id_desa'];
-                $nama_desa    = $r2['nama_desa'];
-                $kode_desa            = $r2['kode_desa'];
-                $kecamatan          = $r2['kecamatan'];
-              ?>
+             ?>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <div class="table-responsive">
+               
                     <table class="table table-head-fixed text-nowrap table-bordered">
                       <thead>
                         <tr class="text-center">
@@ -178,6 +196,12 @@ if ($_SESSION['level'] == "") {
                           <th>Kecamatan</th>
                         </tr>
                       </thead>
+                   <?php   while ($r2 = mysqli_fetch_array($q2)) {
+                $id_desa         = $r2['id_desa'];
+                $nama_desa    = $r2['nama_desa'];
+                $kode_desa            = $r2['kode_desa'];
+                $kecamatan          = $r2['kecamatan'];
+              ?>
                       <tbody>
                         <tr>
                           <td style="width: 20px">
@@ -193,7 +217,7 @@ if ($_SESSION['level'] == "") {
                                   </a>
                                 </li>
                                 <li>
-                                  <a class="dropdown-item" href="#" onclick="handleDelete (6402012001)">
+                                  <a class="dropdown-item" href="../sistem/hapus-desa.php?id_desa=<?php echo $r2['id_desa']; ?>"onclick="return confirm('Anda yakin mau menghapus item ini ?')">
                                     <i class="fas fa-trash    "></i>
                                     Delete
                                   </a>
@@ -210,17 +234,65 @@ if ($_SESSION['level'] == "") {
                       </tbody>
                     <?php } ?>
                     </table>
-                    <footer class="footer footer-black  footer-white ">
+                    <div class="card-footer">
+                        <span class="text-sm float-right">Total Entries :  
+<?php echo $jumlah_desa; ?></span>
+                    </div>
+                    <br>  
+                  </div>
+                </div>
+                <footer class="footer footer-black  footer-white ">
                       <div class="container-fluid">
                         <div class="row">
                           <div class="credits ml-auto">
-
+                          <script>
+                  document.write(new Date().getFullYear())
+                </script> by UMKT
                           </div>
                         </div>
                       </div>
                     </footer>
+                <div class="modal fade" id="modalForm" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Memasukan Data Desa/Kelurahan</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p class="statusMsg"></p>
+                <form action="../sistem/input-desa.php" method="post" name="data">
+                  <div class="form-group">
+                    <label for="inputName"><b>Id Desa</label>
+                    <input type="text" name="id_desa" class="form-control" disabled value="Isi Otomatis Oleh Sistem">
                   </div>
-                </div>
+                  <div class="form-group">
+                    <label for="inputEmail"><b>Kode Desa/Kelurahan</label>
+                    <input type="text" name="kode_desa" class="form-control" required placeholder="Masukan Kode Desa">
+                  </div>
+                  <div class="form-group">
+                    <label for="inputMessage"><b>Nama Desa/Kelurahan</label>
+                    <input type="" name="nama_desa" class="form-control" required placeholder="Masukan Nama Desa">
+                  </div>
+                  <div class="form-group">
+                    <label for="inputMessage"><b>Kecamatan</label>
+                    <input type="" name="kecamatan" class="form-control" required placeholder="Masukan Kecamatan" > 
+                  </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <input type="submit" name="kirim" value="Masukan" class="btn btn-success">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
                 <script src="../assets/js/core/jquery.min.js"></script>
                 <script src="../assets/js/core/popper.min.js"></script>
                 <script src="../assets/js/core/bootstrap.min.js"></script>

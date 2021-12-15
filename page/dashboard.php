@@ -1,9 +1,9 @@
-<?php 
+<?php
 include('../sistem/koneksi.php');
 session_start();
 //berfungsi mengecek apakah user sudah login atau belum
-if($_SESSION['level']==""){
-	header("location:../index.php?pesan=belum_login");
+if ($_SESSION['level'] == "") {
+  header("location:../index.php?pesan=belum_login");
 }
 ?>
 <!DOCTYPE html>
@@ -17,9 +17,9 @@ if($_SESSION['level']==""){
   <title>
     Pertanahan
   </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-    name='viewport' />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
+  <script src="https://kit.fontawesome.com/2a985d6dcf.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   <!-- CSS Files -->
@@ -63,11 +63,11 @@ if($_SESSION['level']==""){
               <ul class="nav">
                 <li>
                   <a href="desa.php">
-                    <span class="sidebar-mini-icon"><i class="nc-icon nc-minimal-right"></i></span>
+                    <span class="sidebar-mini-icon"><i class="fas fa-angle-right"></i></span>
                     <span class="sidebar-normal"> Desa </span>
                   </a>
                 </li>
-                </ul>
+              </ul>
           </li>
           <li>
             <a href="SKPT.php">
@@ -104,8 +104,7 @@ if($_SESSION['level']==""){
             </div>
             <a class="navbar-brand" href="javascript:;">Dashboard </a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
-            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -137,10 +136,14 @@ if($_SESSION['level']==""){
                       <i class="nc-icon nc-globe text-warning"></i>
                     </div>
                   </div>
+                  <?php
+                  $data_desa = mysqli_query($koneksi, "SELECT * FROM desa");
+                  $jumlah_desa = mysqli_num_rows($data_desa);
+                  ?>
                   <div class="col-8 col-lg-9">
                     <div class="numbers">
                       <p class="card-category">Desa/Kelurahan</p>
-                      <p class="card-title">16
+                      <p class="card-title"><?php echo $jumlah_desa; ?>
                       <p>
                     </div>
                   </div>
@@ -148,14 +151,17 @@ if($_SESSION['level']==""){
               </div>
               <div class="card-footer ">
                 <hr>
-                <a href="#">
+                <a href="desa.php">
                   <div class="stats"> More Info
                     <i class="nc-icon nc-minimal-right"></i>
                   </div>
                 </a>
               </div>
             </div>
-          </div>
+          </div> <?php
+                  $data_skpt = mysqli_query($koneksi, "SELECT * FROM skpt");
+                  $jumlah_skpt = mysqli_num_rows($data_skpt);
+                  ?>
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-body ">
@@ -168,7 +174,7 @@ if($_SESSION['level']==""){
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Jumlah SKPT</p>
-                      <p class="card-title">$ 1,345
+                      <p class="card-title"><?php echo $jumlah_skpt; ?>
                       <p>
                     </div>
                   </div>
@@ -183,7 +189,10 @@ if($_SESSION['level']==""){
                 </a>
               </div>
             </div>
-          </div>
+          </div> <?php
+                  $data_user = mysqli_query($koneksi, "SELECT * FROM user");
+                  $jumlah_user = mysqli_num_rows($data_user);
+                  ?>
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-body ">
@@ -196,7 +205,7 @@ if($_SESSION['level']==""){
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Total User</p>
-                      <p class="card-title">23
+                      <p class="card-title"><?php echo $jumlah_user; ?>
                       <p>
                     </div>
                   </div>
@@ -255,34 +264,34 @@ if($_SESSION['level']==""){
             <div class="card card-chart">
               <div class="card-header">
                 <h5 class="card-title">Maps</h5>
-                
+
               </div>
               <div class="card-body">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255345.3281675057!2d116.97984865683895!3d-0.27978066375927724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df674dc1a9584d3%3A0x5410e6a025b3004b!2sKec.%20Tenggarong%20Seberang%2C%20Kabupaten%20Kutai%20Kartanegara%2C%20Kalimantan%20Timur!5e0!3m2!1sid!2sid!4v1639595643500!5m2!1sid!2sid" width="1000" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255345.3281675057!2d116.97984865683895!3d-0.27978066375927724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df674dc1a9584d3%3A0x5410e6a025b3004b!2sKec.%20Tenggarong%20Seberang%2C%20Kabupaten%20Kutai%20Kartanegara%2C%20Kalimantan%20Timur!5e0!3m2!1sid!2sid!4v1639595643500!5m2!1sid!2sid" width="1000" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
               </div>
 
-              
-               
-              </div>
+
+
             </div>
           </div>
         </div>
       </div>
-      <footer class="footer footer-black  footer-white ">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="credits ml-auto">
-              <span class="copyright">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script> by UMKT
-              </span>
-            </div>
+    </div>
+    <footer class="footer footer-black  footer-white ">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="credits ml-auto">
+            <span class="copyright">
+              ©
+              <script>
+                document.write(new Date().getFullYear())
+              </script> by UMKT
+            </span>
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
+  </div>
   </div>
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
@@ -293,7 +302,7 @@ if($_SESSION['level']==""){
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <script src="../assets/demo/demo.js"></script>
   <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
       demo.initChartsPages();
     });
   </script>
