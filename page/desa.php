@@ -1,9 +1,9 @@
-<?php 
+<?php
 include('../sistem/koneksi.php');
 session_start();
 //berfungsi mengecek apakah user sudah login atau belum
-if($_SESSION['level']==""){
-	header("location:../index.php?pesan=belum_login");
+if ($_SESSION['level'] == "") {
+  header("location:../index.php?pesan=belum_login");
 }
 ?>
 <!DOCTYPE html>
@@ -25,6 +25,7 @@ if($_SESSION['level']==""){
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
+  <script src="https://kit.fontawesome.com/2a985d6dcf.js" crossorigin="anonymous"></script>
   <link href="../assets/demo/demo.css" rel="stylesheet" />
 </head>
 
@@ -101,7 +102,7 @@ if($_SESSION['level']==""){
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="javascript:;">SKPT </a>
+            <a class="navbar-brand" href="javascript:;">Desa </a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -122,8 +123,12 @@ if($_SESSION['level']==""){
           </div>
         </div>
       </nav>
-      <br><br>
+
       <section class="content">
+        <div class="col-sm-6">
+          <h3>Manajemen Data Desa/Kelurahan</h3>
+
+        </div>
 
         <div class="row">
           <div class="col-12">
@@ -148,18 +153,18 @@ if($_SESSION['level']==""){
                 </div>
               </div>
               <?php
-                
-                    $sql2   = "select * from desa order by id_desa desc";
 
-                  // ini but tmpilkn dt
-                  $q2     = mysqli_query($koneksi, $sql2);
-                  $urut   = 1;
-                  while ($r2 = mysqli_fetch_array($q2)) {
-                    $id_desa         = $r2['id_desa'];
-                    $nama_desa    = $r2['nama_desa'];
-                    $kode_desa            = $r2['kode_desa'];
-                    $kecamatan          = $r2['kecamatan'];
-                  ?>
+              $sql2   = "select * from desa order by id_desa desc";
+
+              // ini but tmpilkn dt
+              $q2     = mysqli_query($koneksi, $sql2);
+              $urut   = 1;
+              while ($r2 = mysqli_fetch_array($q2)) {
+                $id_desa         = $r2['id_desa'];
+                $nama_desa    = $r2['nama_desa'];
+                $kode_desa            = $r2['kode_desa'];
+                $kecamatan          = $r2['kecamatan'];
+              ?>
                 <!-- /.card-header -->
                 <div class="card-body">
                   <div class="table-responsive">
@@ -199,8 +204,8 @@ if($_SESSION['level']==""){
                           </td>
                           <td style="width: 50px" class="text-center"><?php echo $urut++ ?></td>
                           <td style="width: 50px" class="text-center"><?php echo $kode_desa ?></td>
-                          <td style="width: 50px" class="text-center"><?php echo $nama_desa?></td>
-                          <td style="width: 50px" class="text-center"><?php echo $kecamatan?></td>
+                          <td style="width: 50px" class="text-center"><?php echo $nama_desa ?></td>
+                          <td style="width: 50px" class="text-center"><?php echo $kecamatan ?></td>
                         </tr>
                       </tbody>
                     <?php } ?>
