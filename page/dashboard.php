@@ -5,6 +5,11 @@ session_start();
 if ($_SESSION['level'] == "") {
   header("location:../index.php?pesan=belum_login");
 }
+
+$id_user=$_SESSION["id_user"];
+$username=$_SESSION["username"];
+$nama=$_SESSION["nama"];
+$email=$_SESSION["email"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +51,7 @@ if ($_SESSION['level'] == "") {
           <!-- <p>CT</p> -->
         </a>
         <a href="" class="simple-text logo-normal">
-          Welcome <?php echo $_SESSION['level']; ?>
+          Welcome <?php echo $username ?>
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
           </div> -->

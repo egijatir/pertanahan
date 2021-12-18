@@ -1,44 +1,49 @@
 
 <?php 
 // berfungsi mengaktifkan session
-session_start();
- 
 // berfungsi menghubungkan koneksi ke database
 include 'koneksi.php';
- 
-// berfungsi menangkap data yang dikirim
-$user = $_POST['username'];
-$pass = md5($_POST['password']);
- 
-// berfungsi menyeleksi data user dengan username dan password yang sesuai
-$sql = mysqli_query($koneksi,"SELECT * FROM user WHERE username='$user' AND password='$pass'");
-//berfungsi menghitung jumlah data yang ditemukan
-$cek = mysqli_num_rows($sql);
-
-// berfungsi mengecek apakah username dan password ada pada database
-if($cek > 0){
-	$data = mysqli_fetch_assoc($sql);
-
-	// berfungsi mengecek jika user login sebagai admin
-	if($data['level']=="admin"){
-		// berfungsi membuat session
-		$_SESSION['nama'] =  $data['nama_lengkap'];
-		$_SESSION['level'] = "admin";
-		//berfungsi mengalihkan ke halaman admin
-		header("location:../page/dashboard.php");
-	// berfungsi mengecek jika user login sebagai moderator
-	}else if($data['level']=="moderator"){
-		// berfungsi membuat session
-		$_SESSION['nama'] = $data['nama_lengkap'];
-		$_SESSION['level'] = "moderator";
-		// berfungsi mengalihkan ke halaman moderator
-		header("location:moderator/index.php");
-
-	}else{
-		// berfungsi mengalihkan alihkan ke halaman login kembali
-		header("location:../index.php?pesan=gagal");
-	}	
-}else{
-	header("location:../index.php?pesan=gagal");
+//Fungsi untuk mencegah inputan karakter yang tidak sesuai
+function input($data) {
+   $data = trim($data);
+   $data = stripslashes($data);
+   $data = htmlspecialchars($data);
+   return $data;
 }
+//Cek apakah ada kiriman form dari method post
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+   session_start();
+   include "koneksi.php";
+   $username = input($_POST["username"]);
+   $p = input(md5($_POST["password"]));
+
+   $sql = "select * from user where username='".$username."' and password='".$p."' limit 1";
+   $hasil = mysqli_query ($koneksi,$sql);
+   $jumlah = mysqli_num_rows($hasil);
+
+   if ($jumlah>0) {
+	   $row = mysqli_fetch_assoc($hasil);
+	   $_SESSION["id_user"]=$row["id_user"];
+	   $_SESSION["nama"]=$row["nama"];
+	   $_SESSION["email"]=$row["email"];
+	   $_SESSION["nip_pejabat"]=$row["nip_pejabat"];
+	   $_SESSION["pangkat"]=$row["pangkat"];
+	   $_SESSION["username"]=$row["username"];
+	   $_SESSION["alamat"]=$row["alamat"];
+	   $_SESSION["foto"]=$row["foto"];
+	   $_SESSION["level"]=$row["level"];
+	   if ($_SESSION["level"]=$row["level"]=='admin')
+	   {
+		   header("Location:../page/dashboard.php");
+	   } else if ($_SESSION["level"]=$row["level"]=='pegawai')
+	   {
+		   header("Location:penjual.php");
+	   }
+   }else {
+	header("location:../index.php?pesan=gagal");
+   }
+
+}
+
 ?>

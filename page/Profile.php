@@ -2,6 +2,15 @@
 include('../sistem/koneksi.php');
 session_start();
 //berfungsi mengecek apakah user sudah login atau belum
+if ($_SESSION['level'] == "") {
+  header("location:../index.php?pesan=belum_login");
+}
+
+$id_user = $_SESSION["id_user"];
+$username = $_SESSION["username"];
+$nama = $_SESSION["nama"];
+$email = $_SESSION["email"];
+$level = $_SESSION["level"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +75,7 @@ session_start();
           <!-- <p>CT</p> -->
         </a>
         <a href="" class="simple-text logo-normal">
-          Welcome <?php echo $_SESSION['level']; ?>
+          Welcome <?php echo $username ?>
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
           </div> -->
@@ -160,21 +169,11 @@ session_start();
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle" src="http://151.106.125.164/img/profile.png" alt="User profile picture">
-                </div>
-
-                <h3 class="profile-username text-center">TENGGARONG SEBERANG</h3>
-
-                <p class="text-muted text-center"> <?php echo $_SESSION['level']; ?></p>
-
-
+                </div><hr/>
+                <h3 class="profile-username text-center"><?php echo $nama ?></h3>
               </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-
+            </div>>
           </div>
-          <!-- /.col -->
           <div class="col-md-9">
             <div class="card">
               <div class="card-header p-2">
@@ -182,62 +181,51 @@ session_start();
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
-
-
+                  <?php
+                  $sql2   = "SELECT * FROM user WHERE  id_user='$id_user'";
+                  $q2     = mysqli_query($koneksi, $sql2);
+                  $row=mysqli_fetch_array($q2);
+                  ?>
                   <div class="tab-pane active" id="profile">
                     <form class="form-horizontal" action="http://151.106.125.164/profile/17" method="POST">
                       <input type="hidden" name="_token" value="HQ1unkVOj228trgSAbf8pUaxqM0mVvSO0wj9vQJz"> <input type="hidden" name="_method" value="PUT">
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-3 col-form-label">Nama</label>
                         <div class="col-sm-9">
-                          <input type="text" name="name" value="TENGGARONG SEBERANG" class="form-control " id="inputName" placeholder="Name">
+                          <input type="text" name="name" value="<?php echo $row['nama']?>" class="form-control " id="inputName" placeholder="Name" >
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
-                          <input type="email" name="email" value="tenggarongseberang@mail.com" class="form-control " id="inputEmail" placeholder="Email">
+                          <input type="email" name="email" value="<?php echo $row['email']?>" class="form-control " id="inputEmail" placeholder="Email" >
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="inputName2" class="col-sm-3 col-form-label">Ganti Password</label>
-                        <div class="col-sm-9">
-                          <input type="password" name="password" class="form-control " id="inputName2" placeholder="Kosongkan jika tidak ingin mengganti password">
-                        </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <label for="inputName2" class="col-sm-3 col-form-label">Konfirmasi Password</label>
-                        <div class="col-sm-9">
-                          <input type="password" name="password_confirmation" class="form-control " id="inputName2" placeholder="">
-                        </div>
-                      </div>
-
                       <div class="form-group row">
                         <label for="inputName3" class="col-sm-3 col-form-label">Nama Pejabat</label>
                         <div class="col-sm-9">
-                          <input type="text" name="pejabat" value="" class="form-control " id="inputName3" placeholder="Nama Pejabat">
+                          <input type="text" name="pejabat" value="<?php echo $row['nama']?>" class="form-control " id="inputName3" placeholder="Nama Pejabat">
                         </div>
                       </div>
 
                       <div class="form-group row">
                         <label for="inputNip" class="col-sm-3 col-form-label">NIP Pejabat</label>
                         <div class="col-sm-9">
-                          <input type="text" name="nip" value="" class="form-control " id="inputNip" placeholder="NIP Pejabat">
+                          <input type="text" name="nip" value="<?php echo $row['nip_pejabat']?>" class="form-control " id="inputNip" placeholder="NIP Pejabat">
                         </div>
                       </div>
 
                       <div class="form-group row">
                         <label for="inputGol" class="col-sm-3 col-form-label">Golongan/Pangkat</label>
                         <div class="col-sm-9">
-                          <input type="text" name="golongan_pangkat" value="" class="form-control " id="inputGol" placeholder="Golongan/Pangkat">
+                          <input type="text" name="golongan_pangkat" value="<?php echo $row['pangkat']?>" class="form-control " id="inputGol" placeholder="Golongan/Pangkat">
                         </div>
                       </div>
 
                       <div class="form-group row">
                         <label for="inputAlamat" class="col-sm-3 col-form-label">Alamat Kantor</label>
                         <div class="col-sm-9">
-                          <input type="text" name="alamat" value="" class="form-control " id="inputAlamat" placeholder="Alamat Kantor">
+                          <input type="text" name="alamat" value="<?php echo $row['alamat']?>" class="form-control " id="inputAlamat" placeholder="Alamat Kantor">
                         </div>
                       </div>
 
@@ -266,42 +254,42 @@ session_start();
                   <span aria-hidden="true">&times;</span>
                   <span class="sr-only">Close</span>
                 </button>
-              </div> 
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <a href="../sistem/logout.php"><input name="upload" type="submit" value="Logout" class="btn btn-danger"></a>
-                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <a href="../sistem/logout.php"><input name="upload" type="submit" value="Logout" class="btn btn-danger"></a>
               </div>
             </div>
           </div>
         </div>
+    </div>
 
 
-      </section>
-      <footer class="footer footer-black  footer-white ">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="credits ml-auto">
-              <script>
-                document.write(new Date().getFullYear())
-              </script> by UMKT
-            </div>
+    </section>
+    <footer class="footer footer-black  footer-white ">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="credits ml-auto">
+            <script>
+              document.write(new Date().getFullYear())
+            </script> by UMKT
           </div>
         </div>
-      </footer>
-      <script src="../assets/js/core/jquery.min.js"></script>
-      <script src="../assets/js/core/popper.min.js"></script>
-      <script src="../assets/js/core/bootstrap.min.js"></script>
-      <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-      <script src="../assets/js/plugins/chartjs.min.js"></script>
-      <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-      <script src="../assets/demo/demo.js"></script>
-      <script>
-        $(document).ready(function() {
-          demo.initChartsPages();
-        });
-      </script>
+      </div>
+    </footer>
+    <script src="../assets/js/core/jquery.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <script src="../assets/js/plugins/chartjs.min.js"></script>
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+    <script src="../assets/demo/demo.js"></script>
+    <script>
+      $(document).ready(function() {
+        demo.initChartsPages();
+      });
+    </script>
 </body>
 
 </html>
