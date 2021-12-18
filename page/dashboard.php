@@ -88,7 +88,7 @@ if ($_SESSION['level'] == "") {
             </a>
           </li>
           <li>
-            <a href="../sistem/logout.php">
+            <a href="" data-toggle="modal" data-target="#modalForm2">
             <i class="fas fa-sign-out-alt"></i>
               <p>LogOut</p>
             </a>
@@ -188,7 +188,7 @@ if ($_SESSION['level'] == "") {
               </div>
               <div class="card-footer ">
                 <hr>
-                <a href="#">
+                <a href="SKPT.php">
                   <div class="stats"> More Info
                     <i class="nc-icon nc-minimal-right"></i>
                   </div>
@@ -276,7 +276,24 @@ if ($_SESSION['level'] == "") {
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255345.3281675057!2d116.97984865683895!3d-0.27978066375927724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df674dc1a9584d3%3A0x5410e6a025b3004b!2sKec.%20Tenggarong%20Seberang%2C%20Kabupaten%20Kutai%20Kartanegara%2C%20Kalimantan%20Timur!5e0!3m2!1sid!2sid!4v1639595643500!5m2!1sid!2sid" width="1000" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
               </div>
 
-
+              <div class="modal fade" id="modalForm2" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Yakin Ingin logout ?</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+                </button>
+              </div> 
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <a href="../sistem/logout.php"><input name="upload" type="submit" value="Logout" class="btn btn-danger"></a>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
             </div>
           </div>

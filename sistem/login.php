@@ -1,10 +1,4 @@
-<script>
-  window.setTimeout(function() {
-    $(".alert").fadeTo(500, 0).slideUp(500, function(){
-      $(this).remove(); 
-    });
-  }, 5000);
-</script>
+
 <?php 
 // berfungsi mengaktifkan session
 session_start();
@@ -14,7 +8,7 @@ include 'koneksi.php';
  
 // berfungsi menangkap data yang dikirim
 $user = $_POST['username'];
-$pass = $_POST['password'];
+$pass = md5($_POST['password']);
  
 // berfungsi menyeleksi data user dengan username dan password yang sesuai
 $sql = mysqli_query($koneksi,"SELECT * FROM user WHERE username='$user' AND password='$pass'");
@@ -28,7 +22,7 @@ if($cek > 0){
 	// berfungsi mengecek jika user login sebagai admin
 	if($data['level']=="admin"){
 		// berfungsi membuat session
-		$_SESSION['nama'] = ['nama'];
+		$_SESSION['nama'] =  $data['nama_lengkap'];
 		$_SESSION['level'] = "admin";
 		//berfungsi mengalihkan ke halaman admin
 		header("location:../page/dashboard.php");

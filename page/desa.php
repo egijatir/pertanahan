@@ -102,7 +102,7 @@ if ($_SESSION['level'] == "") {
             </a>
           </li>
           <li>
-            <a href="../sistem/logout.php">
+            <a href="" data-toggle="modal" data-target="#modalForm2">
             <i class="fas fa-sign-out-alt"></i>
               <p>LogOut</p>
             </a>
@@ -143,10 +143,9 @@ if ($_SESSION['level'] == "") {
           </div>
         </div>
       </nav>
-
       <section class="content">
         <div class="col-sm-6">
-          <h3>Manajemen Data Desa/Kelurahan</h3>
+        <b>  <h3>Manajemen Data Desa/Kelurahan</h3></b>
 
         </div>
         <center>     <?php 
@@ -178,10 +177,10 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                     Tambah Data
                   </a>
                   <div class="">
-                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#importModal" title="Import File">
+                  <a href=""  data-toggle="modal" data-target="#modalForm1" class="btn btn-success" title="export excel">
                       <i class="fas fa-file-import    "></i>
                     </a>
-                    <a href="" target="blank" class="btn btn-danger" title="Cetak PDF">
+                    <a href="../sistem/excel-desa.php"  target="blank" class="btn btn-danger" title="Cetak PDF">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                     <a href="../sistem/export.php" class="btn btn-success" title="Export Excel">
@@ -196,11 +195,10 @@ $jumlah_desa = mysqli_num_rows($data_desa);
 
               // ini but tmpilkn dt
               $q2     = mysqli_query($koneksi, $sql2);
-              $urut   = 1;
+            
              ?>
                 <!-- /.card-header -->
                 <div class="card-body">
-               
                     <table class="table table-head-fixed text-nowrap table-bordered">
                       <thead>
                         <tr class="text-center">
@@ -211,13 +209,24 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                           <th>Kecamatan</th>
                         </tr>
                       </thead>
-                   <?php   while ($r2 = mysqli_fetch_array($q2)) {
-                $id_desa         = $r2['id_desa'];
-                $nama_desa    = $r2['nama_desa'];
-                $kode_desa            = $r2['kode_desa'];
-                $kecamatan          = $r2['kecamatan'];
-              ?>
+                    
                       <tbody>
+                      <?php 
+				$batas = 7;
+				$halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
+				$halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;	
+ 
+				$previous = $halaman - 1;
+				$next = $halaman + 1;
+				
+				$data = mysqli_query($koneksi,"select * from desa");
+				$jumlah_data = mysqli_num_rows($data);
+				$total_halaman = ceil($jumlah_data / $batas);
+ 
+				$data_pegawai = mysqli_query($koneksi,"select * from desa limit $halaman_awal, $batas");
+				$nomor = $halaman_awal+1;
+				while($r2 = mysqli_fetch_array($data_pegawai)){
+					?>
                         <tr>
                           <td style="width: 20px">
                             <div class="btn-group">
@@ -239,16 +248,34 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                                 </li>
                               </ul>
                             </div>
-
                           </td>
-                          <td style="width: 50px" class="text-center" ><p class="upper"><?php echo $urut++ ?></td>
-                          <td style="width: 50px" class="text-center" ><?php echo $kode_desa ?></td>
-                          <td style="width: 50px" class="text-center"><p class="upper"><?php echo $nama_desa ?></td>
-                          <td style="width: 50px" class="text-center"> <p class="upper"><?php echo $kecamatan ?></td>
+                          <td style="width: 50px" class="text-center" ><p class="upper"><?php echo $nomor++ ?></td>
+                          <td style="width: 50px" class="text-center" ><?php echo $r2['kode_desa'] ?></td>
+                          <td style="width: 50px" class="text-center"><p class="upper"><?php echo $r2['nama_desa'] ?></td>
+                          <td style="width: 50px" class="text-center"> <p class="upper"><?php echo $r2['kecamatan'] ?></td>
                         </tr>
                       </tbody>
-                    <?php } ?>
+                    <?php } 
+                    error_reporting(0);
+                    ?>
                     </table>
+                    <nav>
+			<ul class="pagination justify-content-left">
+				<li class="page-item">
+					<a class="page-link" <?php if($halaman > 1){ echo "href='?halaman=$Previous'"; } ?>>Previous</a>
+				</li>
+				<?php 
+				for($x=1;$x<=$total_halaman;$x++){
+					?> 
+					<li class="page-item"><a class="page-link" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
+					<?php
+				}
+				?>				
+				<li class="page-item">
+					<a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='?halaman=$next'"; } ?>>Next</a>
+				</li>
+			</ul>
+		</nav>
                     <div class="card-footer">
                         <span class="text-sm float-right">Total Entries :  
 <?php echo $jumlah_desa; ?></span>
@@ -302,6 +329,45 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                     <input type="submit" name="kirim" value="Masukan" class="btn btn-success">
                   </div>
                 </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="modalForm1" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Memasukan Excel</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+                </button>
+              </div> 
+      <form method="post" enctype="multipart/form-data" action="../sistem/upload-excel.php">
+	        <input name="filepegawai" type="file" required="required"> 
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <input name="upload" type="submit" value="Import" class="btn btn-success">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="modalForm2" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Yakin Ingin logout ?</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+                </button>
+              </div> 
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <a href="../sistem/logout.php"><input name="upload" type="submit" value="Logout" class="btn btn-danger"></a>
+                  </div>
               </div>
             </div>
           </div>

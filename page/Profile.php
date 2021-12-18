@@ -2,9 +2,6 @@
 include('../sistem/koneksi.php');
 session_start();
 //berfungsi mengecek apakah user sudah login atau belum
-if ($_SESSION['level'] == "") {
-  header("location:../index.php?pesan=belum_login");
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +88,7 @@ if ($_SESSION['level'] == "") {
             <div class="collapse " id="masterdata">
               <ul class="nav">
                 <li>
-                  <a href="profile.php">
+                  <a href="desa.php">
                     <span class="sidebar-mini-icon"><i class="fas fa-angle-right"></i></span>
                     <span class="sidebar-normal"> desa</span>
                   </a>
@@ -111,7 +108,7 @@ if ($_SESSION['level'] == "") {
             </a>
           </li>
           <li>
-            <a href="../sistem/logout.php">
+            <a href="" data-toggle="modal" data-target="#modalForm2">
               <i class="fas fa-sign-out-alt"></i>
               <p>LogOut</p>
             </a>
@@ -167,7 +164,7 @@ if ($_SESSION['level'] == "") {
 
                 <h3 class="profile-username text-center">TENGGARONG SEBERANG</h3>
 
-                <p class="text-muted text-center">user</p>
+                <p class="text-muted text-center"> <?php echo $_SESSION['level']; ?></p>
 
 
               </div>
@@ -260,6 +257,25 @@ if ($_SESSION['level'] == "") {
           </div>
           <!-- /.col -->
         </div>
+        <div class="modal fade" id="modalForm2" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Yakin Ingin logout ?</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+                </button>
+              </div> 
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <a href="../sistem/logout.php"><input name="upload" type="submit" value="Logout" class="btn btn-danger"></a>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
       </section>
       <footer class="footer footer-black  footer-white ">
