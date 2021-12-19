@@ -4,8 +4,6 @@ session_start();
 //berfungsi mengecek apakah user sudah login atau belum
 if ($_SESSION['level'] == "") {
   header("location:../index.php?pesan=belum_login");
-}elseif($_SESSION['level'] == "pegawai") {
-  header("location:../index.php?pesan=belum_login");
 }
 
 $id_user=$_SESSION["id_user"];
@@ -34,6 +32,7 @@ $email=$_SESSION["email"];
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <script src="https://kit.fontawesome.com/2a985d6dcf.js" crossorigin="anonymous"></script>
   <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
   window.setTimeout(function() {
     $(".alert").fadeTo(500, 0).slideUp(500, function(){
@@ -72,6 +71,24 @@ $email=$_SESSION["email"];
             <img src="../assets/img/logo-big.png">
           </div> -->
         </a>
+        <center>     <?php 
+	if(isset($_GET['pesan'])){
+		if($_GET['pesan']=="berhasil"){
+		echo "<script language = javascript>Swal.fire({
+      position: '',
+      icon: 'success',
+      title: 'Welcome' ,
+      showConfirmButton: false,
+      timer: 1500
+    })</script>";
+		}elseif($_GET['pesan']=="tolak"){
+      echo "<script language = javascript>Swal.fire({
+        icon: 'error',
+        title: 'Oops... 404 Not Found',
+        text: 'Akses Di Tolak!',
+      })</script>";
+		} 
+	}?>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -155,42 +172,29 @@ $email=$_SESSION["email"];
         <b>  <h3>Manajemen Data Desa/Kelurahan</h3></b>
 
         </div>
-        <center>     <?php 
-	if(isset($_GET['pesan'])){
-		if($_GET['pesan']=="berhasil"){
-			echo "<div class='alert alert-success' role='alert'>Data Berhasil Di tambahkan !!</div>";
-		}
-    elseif($_GET['pesan']=="hapus"){
-			echo "<div class='alert alert-danger' role='alert'>Data Berhasil Di Hapus !!</div>";
-		} elseif($_GET['pesan']=="update"){
-			echo "<div class='alert alert-warning' role='alert'>Data Berhasil Di Update !!</div>";
-		}
-	}
-	?>
+        
   <?php
 $data_desa= mysqli_query($koneksi,"SELECT * FROM desa");
 $jumlah_desa = mysqli_num_rows($data_desa);
 ?>
-
-
       </center>  
         <div class="row">
           <div class="col-12">
             <div class="card">
               <div class="card-header">
                 <div class="d-flex justify-content-between">
-                  <a href=""  data-toggle="modal" data-target="#modalForm" class="btn btn-primary">
+                  <a href="desa.php?pesan=tolak"   class="btn btn-primary">
                     <i class="fas fa-user-plus    "></i>
                     Tambah Data
                   </a>
                   <div class="">
-                  <a href=""  data-toggle="modal" data-target="#modalForm1" class="btn btn-success" title="export excel">
+                  <a href="desa.php?pesan=tolak" class="btn btn-success" title="export excel">
                       <i class="fas fa-file-import    "></i>
                     </a>
-                    <a href="../sistem/excel-desa.php"  target="blank" class="btn btn-danger" title="Cetak PDF">
+                    <a href="desa.php?pesan=tolak"  target="blank" class="btn btn-danger" title="Cetak PDF">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
-                    <a href="../sistem/export.php" class="btn btn-success" title="Export Excel">
+                    <a href="desa.php?pesan=tolak" class="btn btn-success" title="Export Excel">
                       <i class="fas fa-file-excel    "></i>
                     </a>
                   </div>
@@ -242,13 +246,13 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                               </button>
                               <ul class="dropdown-menu">
                                 <li>
-                                  <a class="dropdown-item" href="../sistem/edit-desa.php?id_desa=<?php echo $r2['id_desa']; ?>">
+                                  <a class="dropdown-item" href="desa.php?pesan=tolak">
                                     <i class="fas fa-edit    "></i>
                                     Edit
                                   </a>
                                 </li>
                                 <li>
-                                  <a class="dropdown-item" href="../sistem/hapus-desa.php?id_desa=<?php echo $r2['id_desa']; ?>"onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+                                  <a class="dropdown-item" href="desa.php?pesan=tolak">
                                     <i class="fas fa-trash    "></i>
                                     Delete
                                   </a>

@@ -4,8 +4,6 @@ session_start();
 //berfungsi mengecek apakah user sudah login atau belum
 if ($_SESSION['level'] == "") {
   header("location:../index.php?pesan=belum_login");
-}elseif($_SESSION['level'] == "pegawai") {
-  header("location:../index.php?pesan=belum_login");
 }
 
 $id_user=$_SESSION["id_user"];
@@ -70,7 +68,13 @@ $email=$_SESSION["email"];
       showConfirmButton: false,
       timer: 1500
     })</script>";
-		}
+		}elseif($_GET['pesan']=="tolak"){
+      echo "<script language = javascript>Swal.fire({
+        icon: 'error',
+        title: 'Oops... 404 Not Found',
+        text: 'Akses Di Tolak!',
+      })</script>";
+		} 
 	}
 	?>
       </div>
@@ -241,7 +245,7 @@ $email=$_SESSION["email"];
               </div>
               <div class="card-footer ">
                 <hr>
-                <a href="./user.php">
+                <a href="./dashboard.php?pesan=tolak">
                   <div class="stats"> More Info
                     <i class="nc-icon nc-minimal-right"></i>
                   </div>
@@ -269,7 +273,7 @@ $email=$_SESSION["email"];
               </div>
               <div class="card-footer ">
                 <hr>
-                <a href="./user.php">
+                <a href="./dashboard.php?pesan=tolak">
                   <div class="stats"> More Info
                     <i class="nc-icon nc-minimal-right"></i>
                   </div>

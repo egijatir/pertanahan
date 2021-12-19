@@ -4,8 +4,6 @@ session_start();
 //berfungsi mengecek apakah user sudah login atau belum
 if ($_SESSION['level'] == "") {
   header("location:../index.php?pesan=belum_login");
-}elseif($_SESSION['level'] == "pegawai") {
-  header("location:../index.php?pesan=belum_login");
 }
 
 $id_user = $_SESSION["id_user"];

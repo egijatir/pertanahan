@@ -4,8 +4,6 @@ session_start();
 //berfungsi mengecek apakah user sudah login atau belum
 if ($_SESSION['level'] == "") {
   header("location:../index.php?pesan=belum_login");
-}elseif($_SESSION['level'] == "pegawai") {
-  header("location:../index.php?pesan=belum_login");
 }
 
 $id_user=$_SESSION["id_user"];
@@ -81,14 +79,14 @@ $email=$_SESSION["email"];
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="active">
+          <li >
             <a data-toggle="collapse" href="#masterdata">
             <i class="fas fa-folder-open"></i>
               <p>Master Data <b class="caret"></b></p>
             </a>
             <div class="collapse " id="masterdata">
               <ul class="nav">
-                <li class="active ">
+                <li>
                   <a href="desa.php">
                     <span class="sidebar-mini-icon"><i class="fas fa-angle-right"></i></span>
                     <span class="sidebar-normal"> Desa </span>
@@ -129,7 +127,7 @@ $email=$_SESSION["email"];
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="javascript:;">Desa </a>
+        <a class="navbar-brand" href="../page/dashboard.php"><i class="fas fa-arrow-left text-danger"></i></a> </a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -152,7 +150,7 @@ $email=$_SESSION["email"];
       </nav>
       <section class="content">
         <div class="col-sm-6">
-        <b>  <h3>Manajemen Data Desa/Kelurahan</h3></b>
+        <b>  <h3>Total User</h3></b>
 
         </div>
         <center>     <?php 
@@ -168,7 +166,7 @@ $email=$_SESSION["email"];
 	}
 	?>
   <?php
-$data_desa= mysqli_query($koneksi,"SELECT * FROM desa");
+$data_desa= mysqli_query($koneksi,"SELECT * FROM user");
 $jumlah_desa = mysqli_num_rows($data_desa);
 ?>
 
@@ -179,26 +177,13 @@ $jumlah_desa = mysqli_num_rows($data_desa);
             <div class="card">
               <div class="card-header">
                 <div class="d-flex justify-content-between">
-                  <a href=""  data-toggle="modal" data-target="#modalForm" class="btn btn-primary">
-                    <i class="fas fa-user-plus    "></i>
-                    Tambah Data
-                  </a>
-                  <div class="">
-                  <a href=""  data-toggle="modal" data-target="#modalForm1" class="btn btn-success" title="export excel">
-                      <i class="fas fa-file-import    "></i>
-                    </a>
-                    <a href="../sistem/excel-desa.php"  target="blank" class="btn btn-danger" title="Cetak PDF">
-                      <i class="fas fa-file-pdf    "></i>
-                    </a>
-                    <a href="../sistem/export.php" class="btn btn-success" title="Export Excel">
-                      <i class="fas fa-file-excel    "></i>
-                    </a>
-                  </div>
+                  
+                  
                 </div>
               </div>
            <?php
 
-              $sql2   = "select * from desa order by id_desa asc";
+              $sql2   = "select * from user order by id_desa asc";
 
               // ini but tmpilkn dt
               $q2     = mysqli_query($koneksi, $sql2);
@@ -211,26 +196,28 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                         <tr class="text-center">
                           <th>#</th>
                           <th>No</th>
-                          <th>Kode Desa/Kelurahan</th>
-                          <th>Nama Desa/Kelurahan</th>
-                          <th>Kecamatan</th>
+                          <th>Nama</th>
+                          <th>Golongan</th>
+                          <th>Username</th>
+                          <th>Jabatan</th>
+                          <th>Role</th>
                         </tr>
                       </thead>
                     
                       <tbody>
                       <?php 
-				$batas = 7;
+				$batas = 5;
 				$halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
 				$halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;	
  
 				$previous = $halaman - 1;
 				$next = $halaman + 1;
 				
-				$data = mysqli_query($koneksi,"select * from desa");
+				$data = mysqli_query($koneksi,"select * from user");
 				$jumlah_data = mysqli_num_rows($data);
 				$total_halaman = ceil($jumlah_data / $batas);
  
-				$data_pegawai = mysqli_query($koneksi,"select * from desa limit $halaman_awal, $batas");
+				$data_pegawai = mysqli_query($koneksi,"select * from user limit $halaman_awal, $batas");
 				$nomor = $halaman_awal+1;
 				while($r2 = mysqli_fetch_array($data_pegawai)){
 					?>
@@ -257,32 +244,18 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                             </div>
                           </td>
                           <td style="width: 50px" class="text-center" ><p class="upper"><?php echo $nomor++ ?></td>
-                          <td style="width: 50px" class="text-center" ><?php echo $r2['kode_desa'] ?></td>
-                          <td style="width: 50px" class="text-center"><p class="upper"><?php echo $r2['nama_desa'] ?></td>
-                          <td style="width: 50px" class="text-center"> <p class="upper"><?php echo $r2['kecamatan'] ?></td>
+                          <td style="width: 50px" class="text-center" ><?php echo $r2['nama'] ?></td>
+                          <td style="width: 50px" class="text-center"><p class="upper"><?php echo $r2['pangkat'] ?></td>
+                          <td style="width: 50px" class="text-center"> <p class="upper"><?php echo $r2['username'] ?></td>
+                          <td style="width: 50px" class="text-center"> <p class="upper"><?php echo $r2['username'] ?></td>
+                          <td style="width: 50px" class="text-center"> <p class="upper"><?php echo $r2['level'] ?></td>
                         </tr>
                       </tbody>
                     <?php } 
                     error_reporting(0);
                     ?>
                     </table>
-                    <nav>
-			<ul class="pagination justify-content-left">
-				<li class="page-item">
-					<a class="page-link" <?php if($halaman > 1){ echo "href='?halaman=$Previous'"; } ?>>Previous</a>
-				</li>
-				<?php 
-				for($x=1;$x<=$total_halaman;$x++){
-					?> 
-					<li class="page-item"><a class="page-link" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
-					<?php
-				}
-				?>				
-				<li class="page-item">
-					<a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='?halaman=$next'"; } ?>>Next</a>
-				</li>
-			</ul>
-		</nav>
+          
                     <div class="card-footer">
                         <span class="text-sm float-right">Total Entries :  
 <?php echo $jumlah_desa; ?></span>
@@ -301,66 +274,7 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                         </div>
                       </div>
                     </footer>
-                <div class="modal fade" id="modalForm" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Memasukan Data Desa/Kelurahan</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                  <span aria-hidden="true">&times;</span>
-                  <span class="sr-only">Close</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p class="statusMsg"></p>
-                <form action="../sistem/input-desa.php" method="post" name="data">
-                  <div class="form-group">
-                    <label for="inputName"><b>Id Desa</label>
-                    <input type="text" name="id_desa" class="form-control" disabled value="Isi Otomatis Oleh Sistem">
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail"><b>Kode Desa/Kelurahan</label>
-                    <input type="text" name="kode_desa" class="form-control" required placeholder="Masukan Kode Desa">
-                  </div>
-                  <div class="form-group">
-                    <label for="inputMessage"><b>Nama Desa/Kelurahan</label>
-                    <input type="" name="nama_desa" class="form-control" required placeholder="Masukan Nama Desa">
-                  </div>
-                  <div class="form-group">
-                    <label for="inputMessage"><b>Kecamatan</label>
-                    <input type="" name="kecamatan" class="form-control" required placeholder="Masukan Kecamatan" > 
-                  </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <input type="submit" name="kirim" value="Masukan" class="btn btn-success">
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal fade" id="modalForm1" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Memasukan Excel</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                  <span aria-hidden="true">&times;</span>
-                  <span class="sr-only">Close</span>
-                </button>
-              </div> 
-      <form method="post" enctype="multipart/form-data" action="../sistem/upload-excel.php">
-	        <input name="filepegawai" type="file" required="required"> 
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <input name="upload" type="submit" value="Import" class="btn btn-success">
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+            <br><br>
         <div class="modal fade" id="modalForm2" role="dialog">
           <div class="modal-dialog">
             <div class="modal-content">

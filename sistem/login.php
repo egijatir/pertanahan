@@ -35,10 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	   $_SESSION["level"]=$row["level"];
 	   if ($_SESSION["level"]=$row["level"]=='admin')
 	   {
-		   header("Location:../page/dashboard.php");
+		   header("Location:../page/dashboard.php?pesan=berhasil");
 	   } else if ($_SESSION["level"]=$row["level"]=='pegawai')
 	   {
-		   header("Location:penjual.php");
+		   header("Location:../pegawai/dashboard.php?pesan=berhasil");
 	   }
    }else {
 	header("location:../index.php?pesan=gagal");
