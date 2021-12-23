@@ -2,9 +2,7 @@
 include('../sistem/koneksi.php');
 session_start();
 //berfungsi mengecek apakah user sudah login atau belum
-if ($_SESSION['level'] == "") {
-  header("location:../index.php?pesan=belum_login");
-}elseif($_SESSION['level'] == "pegawai") {
+if ($_SESSION['level'] =="") {
   header("location:../index.php?pesan=belum_login");
 }
 

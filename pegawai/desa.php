@@ -188,9 +188,6 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                     Tambah Data
                   </a>
                   <div class="">
-                  <a href="desa.php?pesan=tolak" class="btn btn-success" title="export excel">
-                      <i class="fas fa-file-import    "></i>
-                    </a>
                     <a href="desa.php?pesan=tolak"  target="blank" class="btn btn-danger" title="Cetak PDF">
                       <i class="fas fa-file-pdf    "></i>
                     </a>

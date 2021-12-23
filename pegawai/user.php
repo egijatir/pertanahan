@@ -127,7 +127,7 @@ $email=$_SESSION["email"];
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-        <a class="navbar-brand" href="../page/dashboard.php"><i class="fas fa-arrow-left text-danger"></i></a> </a>
+        <a class="navbar-brand" href="dashboard.php"><i class="fas fa-arrow-left text-danger"></i></a> </a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>

@@ -4,8 +4,6 @@ session_start();
 //berfungsi mengecek apakah user sudah login atau belum
 if ($_SESSION['level'] == "") {
   header("location:../index.php?pesan=belum_login");
-}elseif($_SESSION['level'] == "pegawai") {
-  header("location:../index.php?pesan=belum_login");
 }
 
 $id_user=$_SESSION["id_user"];
@@ -181,7 +179,7 @@ $email=$_SESSION["email"];
                     <!-- <a href="" class="btn btn-default btn-flat " data-toggle="modal" data-target="#importModal" title="Import File">
                             <i class="fas fa-file-import    "></i>
                         </a> -->
-                    <a href="http://151.106.125.164/skpt/pdf" target="blank" class="btn btn-danger" title="Laporan">
+                    <a href="../sistem/print-skpt.php" target="blank" class="btn btn-danger" title="Laporan">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                     <a href="http://151.106.125.164/skpt/arsip" target="blank" class="btn btn-danger" title="Arsip SKPT">
@@ -258,13 +256,13 @@ $email=$_SESSION["email"];
                                     </a>
                                   </li>
                                   <li>
-                                    <a class="dropdown-item" href="http://151.106.125.164/skpt/140">
+                                    <a class="dropdown-item" href="../sistem/lihat-skpt.php?id_skpt=<?php echo $r2['id_skpt']; ?>">
                                       <i class="fas fa-eye    "></i>
                                       Lihat SKPT
                                     </a>
                                   </li>
                                   <li>
-                                    <a class="dropdown-item" href="http://151.106.125.164/skpt/140/edit">
+                                    <a class="dropdown-item" href="../sistem/edit-skpt.php">
                                       <i class="fas fa-edit    "></i>
                                       Edit
                                     </a>
@@ -290,7 +288,7 @@ $email=$_SESSION["email"];
                             <td><?php echo $r2['total_luas_tanah']  ?>  M<sup>2</sup></td>
                             <td><?php echo $r2['penggunaan_tanah']  ?></td>
                             <td>TENGGARONG SEBERANG</td>
-                            <td>BUKIT PARIAMAN</td>
+                            <td><?php echo $r2['desa']  ?></td>
                             <td><?php echo $r2['tahun_penguasaan']  ?></td>
                             <td><?php echo $r2['latitud1']  ?></td>
                           </tr>

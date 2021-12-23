@@ -68,6 +68,11 @@
                 <input type="submit" value="Log In" class="btn btn-block btn-primary">
 
               </form>
+              <div class="callout callout-info mt-3 small">
+                <h6>USER</h6>
+                <span>username : tenggarong@mail.com</span><br>
+                <span>password : password</span><br><br>
+            </div>
             </div>
           </div>
         </div>

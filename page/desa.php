@@ -4,8 +4,6 @@ session_start();
 //berfungsi mengecek apakah user sudah login atau belum
 if ($_SESSION['level'] == "") {
   header("location:../index.php?pesan=belum_login");
-}elseif($_SESSION['level'] == "pegawai") {
-  header("location:../index.php?pesan=belum_login");
 }
 
 $id_user=$_SESSION["id_user"];
@@ -184,10 +182,8 @@ $jumlah_desa = mysqli_num_rows($data_desa);
                     Tambah Data
                   </a>
                   <div class="">
-                  <a href=""  data-toggle="modal" data-target="#modalForm1" class="btn btn-success" title="export excel">
-                      <i class="fas fa-file-import    "></i>
-                    </a>
-                    <a href="../sistem/excel-desa.php"  target="blank" class="btn btn-danger" title="Cetak PDF">
+                 
+                    <a href="../sistem/pdf-desa.php"  target="blank" class="btn btn-danger" title="Cetak PDF">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                     <a href="../sistem/export.php" class="btn btn-success" title="Export Excel">

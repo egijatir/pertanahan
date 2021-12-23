@@ -179,7 +179,7 @@ $email=$_SESSION["email"];
                     <!-- <a href="" class="btn btn-default btn-flat " data-toggle="modal" data-target="#importModal" title="Import File">
                             <i class="fas fa-file-import    "></i>
                         </a> -->
-                    <a href="http://151.106.125.164/skpt/pdf" target="blank" class="btn btn-danger" title="Laporan">
+                    <a href="../sistem/print-skpt.php" target="blank" class="btn btn-danger" title="Laporan">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                     <a href="http://151.106.125.164/skpt/arsip" target="blank" class="btn btn-danger" title="Arsip SKPT">

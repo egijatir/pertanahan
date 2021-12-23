@@ -16,7 +16,7 @@ $level = $_SESSION["level"];
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
+<meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/images/pavi.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -33,6 +33,7 @@ $level = $_SESSION["level"];
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <script src="https://kit.fontawesome.com/2a985d6dcf.js" crossorigin="anonymous"></script>
   <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     window.setTimeout(function() {
       $(".alert").fadeTo(500, 0).slideUp(500, function() {
@@ -160,18 +161,24 @@ $level = $_SESSION["level"];
         </div>
       </nav>
       <section class="content">
-      <center>     <?php 
+      <center>     <center>     <?php 
 	if(isset($_GET['pesan'])){
 		if($_GET['pesan']=="berhasil"){
-			echo "<div class='alert alert-success' role='alert'>Data Berhasil Di tambahkan !!</div>";
-		}
-    elseif($_GET['pesan']=="hapus"){
-			echo "<div class='alert alert-danger' role='alert'>Data Berhasil Di Hapus !!</div>";
-		} elseif($_GET['pesan']=="update"){
-			echo "<div class='alert alert-warning' role='alert'>Data Berhasil Di Update !!</div>";
-		}
-	}
-	?>
+		echo "<script language = javascript>Swal.fire({
+      position: '',
+      icon: 'success',
+      title: 'Welcome' ,
+      showConfirmButton: false,
+      timer: 1500
+    })</script>";
+		}elseif($_GET['pesan']=="tolak"){
+      echo "<script language = javascript>Swal.fire({
+        icon: 'error',
+        title: 'Oops... 404 Not Found',
+        text: 'Akses Di Tolak!',
+      })</script>";
+		} 
+	}?>
         <div class="row">
           <div class="col-md-3">
           
@@ -251,7 +258,7 @@ $level = $_SESSION["level"];
                         </div>
                       </div>
                     </form>
-                    <A href="../sistem/edit-profile.php?id_user=<?php echo $row['id_user']; ?>"> <button  class="btn btn-success">Update</button></A> <A href="../sistem/edit-profile-password.php?id_user=<?php echo $row['id_user']; ?>"> <button  class="btn btn-danger">Ubah Password</button></A>
+                    <A href="profile.php?pesan=tolak"> <button  class="btn btn-success">Update</button></A> <A href="profile.php?pesan=tolak"> <button  class="btn btn-danger">Ubah Password</button></A>
                   </div>
                   <!-- /.tab-pane -->
                 </div>
