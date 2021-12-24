@@ -1,10 +1,5 @@
 <?php
 include('../sistem/koneksi.php');
-$id_skpt = $_GET['id_skpt'];
-$data   = "SELECT * from skpt where id_skpt='$id_skpt'";
-$data1  = mysqli_query($koneksi, $data);
-$data2  = mysqli_fetch_array($data1);
-
 session_start();
 //berfungsi mengecek apakah user sudah login atau belum
 if ($_SESSION['level'] == "") {
@@ -145,7 +140,7 @@ $email=$_SESSION["email"];
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="../page/SKPT.php"><i class="fas fa-arrow-left text-danger"></i></a>
+            <a class="navbar-brand" href="../pegawai/SKPT.php"><i class="fas fa-arrow-left text-danger"></i></a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -177,35 +172,36 @@ $email=$_SESSION["email"];
                   <div class="card-header">
                     <h3 class="card-title " >Data Pemohon</h3>
                   </div>
-                  <form action="input-skpt.php" method="post" name="data" width="500" enctype="multipart/form-data" >
+                  <form action="input-skpt-user.php" method="post" name="data" width="500" enctype="multipart/form-data" >
+                    
                     <div class="form-group">
-                      <label for="inputMessage"><b>Nama Pemohon</label>
-                      <input type="" name="nama_pemohon" class="form-control" required autofocus value="<?php echo $data2['nama_pemohon']; ?>">
+                      <label for="inputMessage"><b>nama pemohon</label>
+                      <input type="" name="nama_pemohon" class="form-control" required autofocus>
                     </div>
                     <div class="form-group">
-                      <label for="inputEmail"><b>NIK</label>
-                      <input type="text" name="nik" class="form-control" required value="<?php echo $data2['nik']; ?>"> 
+                      <label for="inputEmail"><b>nik</label>
+                      <input type="text" name="nik" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="inputMessage"><b>Tempat Lahir</label>
-                      <input type="" name="tempat_lahir" class="form-control" required value="<?php echo $data2['tempat_lahir']; ?>">
+                      <label for="inputMessage"><b>tempat lahir</label>
+                      <input type="" name="tempat_lahir" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="inputMessage"><b>Tanggal Lahir</label>
-                      <input type="date" name="tangal_lahir" class="form-control" required value="<?php echo $data2['tangal_lahir']; ?>">
+                      <label for="inputMessage"><b>tanggal lahir</label>
+                      <input type="" name="tangal_lahir" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="inputMessage"><b>Alamat Pemohon</label>
-                      <input type="" name="alamat_pemohon" class="form-control" required value="<?php echo $data2['alamat_pemohon']; ?>">
+                      <label for="inputMessage"><b>alamat pemohon</label>
+                      <input type="" name="alamat_pemohon" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="inputMessage"><b>Pekerjaan</label>
-                      <input type="" name="pekerjaan" class="form-control" required value="<?php echo $data2['pekerjaan']; ?>"> 
-                    </div><br>
+                      <label for="inputMessage"><b>pekerjaan</label>
+                      <input type="" name="pekerjaan" class="form-control" required>
+                    </div>
                     <div class="form">
-                      <label for="inputMessage"><b>Dokumen</label>
-                      <input type="file" name="dokumen"  value="<?php echo $data2['dokumen']; ?>">
-                    </div>  <br> 
+                      <label for="inputMessage"><b>dokumen</label>
+                      <input type="file" name="dokumen" required>
+                    </div>
                 </div>
               </div>
               <div class="card card-primary">
@@ -217,20 +213,20 @@ $email=$_SESSION["email"];
                   <!-- /.card-header -->
                   <div class="card-body">
                     <div class="form-group">
-                      <label for="inputMessage"><b>Alamat lokasi</label>
-                      <input type="" name="alamat_lokasi" class="form-control" required value="<?php echo $data2['alamat_lokasi']; ?>">
+                      <label for="inputMessage"><b>alamat lokasi</label>
+                      <input type="" name="alamat_lokasi" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="inputMessage"><b>RT/RW</label>
-                      <input type="" name="rt_rw" class="form-control" required value="<?php echo $data2['rt_rw']; ?>">
+                      <label for="inputMessage"><b>rt_rw</label>
+                      <input type="" name="rt_rw" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="inputMessage"><b>Desa/Kelurahan</label>
-                      <input type="" name="desa" class="form-control" required value="<?php echo $data2['desa']; ?>">
+                      <label for="inputMessage"><b>desa</label>
+                      <input type="" name="desa" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="inputMessage"><b>Pengunaan Tanah</label>
-                      <input type="" name="penggunaan_tanah" class="form-control" required value="<?php echo $data2['penggunaan_tanah']; ?>">
+                      <label for="inputMessage"><b>pengunaan tanah</label>
+                      <input type="" name="penggunaan_tanah" class="form-control" required>
                     </div>
                   </div>
                 </div>
@@ -242,19 +238,18 @@ $email=$_SESSION["email"];
                 <h3 class="card-title">Alamat Objek Tanah</h3>
               </div>
               <div class="card-body">
-              <div class="form-group">
-                  <label for="inputMessage"><b>Ukuran Lebar (M<sup>2</sup>)</label>
-                  <input type="" name="ukuran_lebar" class="form-control" required value="<?php echo $data2['ukuran_lebar']; ?>"> 
+                <div class="form-group">
+                  <label for="inputMessage"><b>total luas tanah</label>
+                  <input type="" name="total_luas_tanah" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label for="inputMessage"><b>Ukuran Panjang Tanah (M<sup>2</sup>)</label>
-                  <input type="" name="ukuran_panjang" class="form-control" required value="<?php echo $data2['ukuran_panjang']; ?>">
+                  <label for="inputMessage"><b>ukuran panjang</label>
+                  <input type="" name="ukuran_panjang" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label for="inputMessage"><b>Total Luas Tanah (M<sup>2</sup>)</label>
-                  <input type="" name="total_luas_tanah" class="form-control" required value="<?php echo $data2['total_luas_tanah']; ?>">
+                  <label for="inputMessage"><b>ukuran lebar</label>
+                  <input type="" name="ukuran_lebar" class="form-control" required>
                 </div>
-               
               </div>
             </div>
 
@@ -267,12 +262,12 @@ $email=$_SESSION["email"];
                   <div class="col-sm-10">
                     <div class="form-group">
                       <label for="inputMessage"><b>Tahun penguasaan</label>
-                      <input type="years" name="tahun_penguasaan" class="form-control" required value="<?php echo $data2['tahun_penguasaan']; ?>">
+                      <input type="" name="tahun_penguasaan" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="inputMessage"><b>Cara Perolehan Tanah</label>
-                      <input type="" name="cara_peroleh_tanah" class="form-control" required value="<?php echo $data2['cara_peroleh_tanah']; ?>">
-                    </div><br>
+                      <label for="inputMessage"><b>cara peroleh tanah</label>
+                      <input type="" name="cara_peroleh_tanah" class="form-control" required>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -286,49 +281,46 @@ $email=$_SESSION["email"];
                       <div class="row">
                         <div class="col-sm-5">
                     <div class="form-group">
-                      <label for="inputMessage"><b>Latitud 1</label>
-                      <input type="" name="latitud1" class="form-control" required autofocus value="<?php echo $data2['latitud1']; ?>">
+                      <label for="inputMessage"><b>latitud 1</label>
+                      <input type="" name="latitud1" class="form-control" required autofocus>
                     </div></div>
                     <div class="col-sm-10">
                     <div class="form-group">
-                    <label for="inputMessage"><b>Longitud 1</label>
-                      <input type="" name="longitud1" class="form-control" required value="<?php echo $data2['longitud1']; ?>">
-                     
+                      <label for="inputMessage"><b>latitud 2</label>
+                      <input type="" name="latitud2" class="form-control" required autofocus>
                     </div></div></div>
                     <div class="row">
                     <div class="col-sm-5">
                     <div class="form-group">
-                    <label for="inputMessage"><b>Latitud 2</label>
-                      <input type="" name="latitud2" class="form-control" required autofocus value="<?php echo $data2['latitud2']; ?>">
+                      <label for="inputMessage"><b>latitud 3</label>
+                      <input type="" name="latitud3" class="form-control" required autofocus>
                     </div></div>
                     <div class="col-sm-10">
                     <div class="form-group">
-                    <label for="inputMessage"><b>Longitud 2</label>
-                      <input type="" name="longitud2" class="form-control" required value="<?php echo $data2['longitud2']; ?>">
-                     
+                      <label for="inputMessage"><b>latitud 4</label>
+                      <input type="" name="latitud4" class="form-control" required>
                       </div></div></div>
                     <div class="row">
                     <div class="col-sm-5">
                     <div class="form-group">
-                    <label for="inputMessage"><b>Latitud 3</label>
-                      <input type="" name="latitud3" class="form-control" required autofocus value="<?php echo $data2['latitud3']; ?>">
+                      <label for="inputMessage"><b>longitud 1</label>
+                      <input type="" name="longitud1" class="form-control" required>
                     </div></div>  
                     <div class="col-sm-10">
                     <div class="form-group">
-                    <label for="inputMessage"><b>Longitud 3</label>
-                      <input type="" name="longitud3" class="form-control" required value="<?php echo $data2['longitud3']; ?>">
-                    
+                      <label for="inputMessage"><b>longitud 2</label>
+                      <input type="" name="longitud2" class="form-control" required>
                     </div></div></div>
                     <div class="row">
                     <div class="col-sm-5">
                     <div class="form-group">
-                    <label for="inputMessage"><b>Latitud 4</label>
-                      <input type="" name="latitud4" class="form-control" required value="<?php echo $data2['latitud4']; ?>">
+                      <label for="inputMessage"><b>longitud 3</label>
+                      <input type="" name="longitud3" class="form-control" required>
                       </div></div>
                     <div class="col-sm-10">
                     <div class="form-group">
-                      <label for="inputMessage"><b>Longitud 4</label>
-                      <input type="" name="longitud4" class="form-control" required value="<?php echo $data2['longitud4']; ?>">
+                      <label for="inputMessage"><b>longitud 4</label>
+                      <input type="" name="longitud4" class="form-control" required>
                     </div></div></div>
                     <div class="form-group">
                     <label for="koordinat">Koordinat Lebih dari 4 Titik</label>
@@ -337,27 +329,26 @@ $email=$_SESSION["email"];
                             <br>
                             Aplikasi hanya menerima Sistem proyeksi geografis <br>Desimal Derajat (DD) dan Universal Transver Mercator (UTM) <br>sebagai standard data pengisian.
                           </p>
-                      <textarea type="" name="kordinat" class="form-control" required value="<?php echo $data2['kordinat']; ?>"></textarea>
+                      <textarea type="" name="kordinat" class="form-control" required></textarea>
                     </div>
                     <div class="form-group">
-                      <label for="inputMessage"><b>Batas utara</label>
-                      <input type="" name="batas_utara" class="form-control" required value="<?php echo $data2['batas_utara']; ?>">
+                      <label for="inputMessage"><b>batas utara</label>
+                      <input type="" name="batas_utara" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="inputMessage"><b>Batas Timur</label>
-                      <input type="" name="batas_timur" class="form-control" required value="<?php echo $data2['batas_timur']; ?>">
+                      <label for="inputMessage"><b>batas timur</label>
+                      <input type="" name="batas_timur" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="inputMessage"><b>Batas Barat</label>
-                      <input type="" name="batas_barat" class="form-control" required value="<?php echo $data2['batas_barat']; ?>">
+                      <label for="inputMessage"><b>batas barat</label>
+                      <input type="" name="batas_barat" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label for="inputMessage"><b>Batas Selatan</label>
-                      <input type="" name="batas_selatan" class="form-control" required value="<?php echo $data2['batas_selatan']; ?>">
-                    </div>
-                    <input type="hidden" name="tgl_sekarang" value="<?php echo date("d-m-Y"); ?>">
+                      <label for="inputMessage"><b>batas selatan</label>
+                      <input type="" name="batas_selatan" class="form-control" required>
+  </div>
                     <div class="modal-footer">
-                      <a href="../page/SKPT.php" style="color: #000000"><button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                      <a href="" style="color: #000000"><button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <input type="submit" name="kirim" value="Masukan" class="btn btn-success">
                     </div>
                     </form>

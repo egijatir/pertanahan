@@ -262,7 +262,7 @@ $email=$_SESSION["email"];
                                     </a>
                                   </li>
                                   <li>
-                                    <a class="dropdown-item" href="../sistem/edit-skpt.php">
+                                    <a class="dropdown-item" href="../sistem/edit-skpt.php?id_skpt=<?php echo $r2['id_skpt']; ?>">
                                       <i class="fas fa-edit    "></i>
                                       Edit
                                     </a>
@@ -279,12 +279,12 @@ $email=$_SESSION["email"];
                             <td><?php echo $nomor++ ?></td>
                             <!-- <td style="width: 50px">1</td> -->
                             <td class="text-center">
-                            <?php echo $r2['dokumen'] ?> 
+                           <a href="../assets/file/<?php echo $r2['dokumen'] ?>" target="blank"><img src="../assets/images/pdf.png" width="35"></a>
                             </td>
                             <td><?php echo $r2['no_reff'] ?></td>
                             <td><?php echo $r2['nama_pemohon']  ?></td>
                             <td><?php echo $r2['alamat_pemohon']  ?></td>
-                            <td>P <?php echo  $r2['ukuran_panjang']  ?> x L <?php echo $r2['ukuran_lebar']  ?></td>
+                            <td>P <?php echo  $r2['ukuran_panjang']  ?> M<sup>2</sup> x L <?php echo $r2['ukuran_lebar']  ?> M<sup>2</sup></td>
                             <td><?php echo $r2['total_luas_tanah']  ?>  M<sup>2</sup></td>
                             <td><?php echo $r2['penggunaan_tanah']  ?></td>
                             <td>TENGGARONG SEBERANG</td>

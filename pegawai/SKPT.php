@@ -171,7 +171,7 @@ $email=$_SESSION["email"];
             <div class="card">
               <div class="card-header">
                 <div class="d-flex justify-content-between">
-                  <a href="../sistem/tambah-skpt.php" class="btn btn-primary">
+                  <a href="../sistem/tambah-skpt-user.php" class="btn btn-primary">
                     <i class="fas fa-user-plus    "></i>
                     Tambah Data
                   </a>
@@ -234,11 +234,11 @@ $email=$_SESSION["email"];
 				$previous = $halaman - 1;
 				$next = $halaman + 1;
 				
-				$data = mysqli_query($koneksi,"select * from skpt");
+				$data = mysqli_query($koneksi,"select * from skpt  ");
 				$jumlah_data = mysqli_num_rows($data);
 				$total_halaman = ceil($jumlah_data / $batas);
  
-				$data_pegawai = mysqli_query($koneksi,"select * from skpt limit $halaman_awal, $batas");
+				$data_pegawai = mysqli_query($koneksi,"select * from skpt limit $halaman_awal, $batas ");
 				$nomor = $halaman_awal+1;
 				while($r2 = mysqli_fetch_array($data_pegawai)){
 					?>
@@ -279,12 +279,12 @@ $email=$_SESSION["email"];
                             <td><?php echo $nomor++ ?></td>
                             <!-- <td style="width: 50px">1</td> -->
                             <td class="text-center">
-                            <?php echo $r2['dokumen'] ?> 
+                            <a href="../assets/file/<?php echo $r2['dokumen'] ?>" target="blank"><img src="../assets/images/pdf.png" width="35"></a>
                             </td>
                             <td><?php echo $r2['no_reff'] ?></td>
                             <td><?php echo $r2['nama_pemohon']  ?></td>
                             <td><?php echo $r2['alamat_pemohon']  ?></td>
-                            <td>P <?php echo  $r2['ukuran_panjang']  ?> x L <?php echo $r2['ukuran_lebar']  ?></td>
+                            <td>P <?php echo  $r2['ukuran_panjang']  ?>M<sup>2</sup> x L <?php echo $r2['ukuran_lebar']  ?>M<sup>2</sup></td>
                             <td><?php echo $r2['total_luas_tanah']  ?>  M<sup>2</sup></td>
                             <td><?php echo $r2['penggunaan_tanah']  ?></td>
                             <td>TENGGARONG SEBERANG</td>

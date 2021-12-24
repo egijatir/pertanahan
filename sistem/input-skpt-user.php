@@ -31,7 +31,7 @@ if($tipe_file =="application/pdf"){
   $batas_barat= trim($_POST['batas_barat']);
   $batas_selatan= trim($_POST['batas_selatan']);
   $tgl_sekarang= trim($_POST['tgl_sekarang']);
-  $no_rf= trim($_POST['no_reff']);
+  $no_reff= trim($_POST['no_reff']);
 
 
 
@@ -41,7 +41,7 @@ if($tipe_file =="application/pdf"){
   values('$nama_pemohon','$nik','$tempat_lahir','$tangal_lahir','$alamat_pemohon','$pekerjaan','$dokumen','$alamat_lokasi','$rt_rw'
     ,'$desa','$penggunaan_tanah','$total_luas_tanah','$ukuran_panjang','$ukuran_lebar','$tahun_penguasaan','$cara_peroleh_tanah','$latitud1','$latitud2','$latitud3'
     ,'$latitud4','$longitud1','$longitud2','$longitud3','$longitud4','$kordinat','$batas_utara','$batas_timur','$batas_barat','$batas_barat'
-    ,'$tgl_sekarang','$no_rf')";
+    ,'$tgl_sekarang','$no_reff')";
   mysqli_query($koneksi,$sql);
 
   $query =mysqli_query($koneksi,"SELECT * FROM skpt  order by  id_skpt desc limit 1");
@@ -55,5 +55,5 @@ if($tipe_file =="application/pdf"){
   mysqli_query($koneksi,"UPDATE skpt set dokumen='$nama_baru' where id_skpt='$data[id_skpt]'");
   
 }
-header("location:../page/skpt.php?pesan=berhasil");
+header("location:../pegawai/skpt.php?pesan=berhasil");
   ?>
